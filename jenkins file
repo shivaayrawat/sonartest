@@ -6,7 +6,7 @@ pipeline {
             steps {
                 // Checkout your source code from your version control system (e.g., Git)
                 // For Git:
-                git 'https://github.com/your_username/your_project.git'
+                git 'https://github.com/shivaayrawat/sonartest.git'
             }
         }
 
@@ -18,20 +18,12 @@ pipeline {
             }
         }
 
-        stage('Unit Tests') {
-            steps {
-                // Run your unit tests here
-                // Replace the command with your actual unit test command
-                sh 'mvn test'
-            }
-        }
 
         stage('SonarQube Analysis') {
+                 environment { Sonarurl= "http://20.219.236.142:9010"}
             steps {
-                // Run SonarQube analysis
-                // You should have the SonarQube scanner installed on your Jenkins agent or use a container with the scanner pre-installed
-                // Make sure to pass your SonarQube project key and token (if required)
-                sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_URL} -Dsonar.projectKey=your_project_key -Dsonar.login=your_sonarqube_token"
+                withCredentials([string(credentialsId: 'sonarqube', Variable: 'tetsing for demo')]) {
+                    sh 'mvn sonar:sonar -Dsonar.login=$tesing for demo -Donar.host.url=${Sonarurl}'
             }
         }
     }
