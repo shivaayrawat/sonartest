@@ -1,0 +1,41 @@
+pipeline {
+    agent none
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your source code from your version control system (e.g., Git)
+                // For Git:
+                git 'https://github.com/your_username/your_project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build your project
+                // Replace 'mvn' with the appropriate build tool for your project (e.g., gradle, npm, etc.)
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                // Run your unit tests here
+                // Replace the command with your actual unit test command
+                sh 'mvn test'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                // Run SonarQube analysis
+                // You should have the SonarQube scanner installed on your Jenkins agent or use a container with the scanner pre-installed
+                // Make sure to pass your SonarQube project key and token (if required)
+                sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_URL} -Dsonar.projectKey=your_project_key -Dsonar.login=your_sonarqube_token"
+            }
+        }
+    }
+}
+
+
+
