@@ -13,8 +13,8 @@ pipeline {
         stage('SonarQube Analysis') {
                  environment { Sonarurl= "http://20.219.236.142:9010"}
             steps {
-                withCredentials([string(credentialsId: 'sonarqube', Variable: 'tetsing for demo')]) {
-                    sh 'mvn sonar:sonar -Dsonar.login=$tesing for demo -Donar.host.url=${Sonarurl}'
+                withCredentials([string(credentialsId: 'sonarqube', Variable: 'testing for demo')]) {
+                    sh 'mvn sonar:sonar -Dsonar.login=$testing for demo -Donar.host.url=${Sonarurl}'
             }
         }
     }
