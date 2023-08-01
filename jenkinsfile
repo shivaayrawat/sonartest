@@ -10,15 +10,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                // Build your project
-                // Replace 'mvn' with the appropriate build tool for your project (e.g., gradle, npm, etc.)
-                sh 'mvn clean package'
-            }
-        }
-
-
         stage('SonarQube Analysis') {
                  environment { Sonarurl= "http://20.219.236.142:9010"}
             steps {
