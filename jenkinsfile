@@ -1,9 +1,7 @@
 
 pipeline {
     agent any
-    tools { 
-        maven 'maven'
-    }
+   
     stages {
         stage('Checkout git') {
             steps {
@@ -11,11 +9,7 @@ pipeline {
             }
         }
    
-        stage ('Build') {
-            steps {
-                sh 'mvn install' 
-            }
-        }
+       
         stage('SonarQube Analysis'){
             steps{
                    withSonarQubeEnv('sonarqube') {
