@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Checkout git') {
             steps {
-               git branch: 'master', url:'https://github.com/shivaayrawat/sonartest.git'
+               git'https://github.com/shivaayrawat/sonartest.git'
             }
         }
    
