@@ -10,7 +10,7 @@ pipeline {
                git branch: 'master', url:'https://github.com/shivaayrawat/sonartest.git'
             }
         }
-        
+   
         stage ('Build) {
             steps {
                 sh 'mvn install' 
