@@ -1,24 +1,33 @@
+
 pipeline {
     agent any
-
+    tools { 
+        maven 'maven'
+    }
     stages {
-        stage('Checkout') {
+        stage('Checkout git') {
             steps {
-                // Checkout your source code from your version control system (e.g., Git)
-                // For Git:
-                git 'https://github.com/shivaayrawat/sonartest.git'
+               git branch: 'master', url:'https://github.com/shivaayrawat/sonartest.git'
             }
         }
-
-        stage('SonarQube Analysis') {
-                 environment { Sonarurl= "http://20.219.236.142:9010"}
+        
+        stage ('Build) {
             steps {
-                withCredentials([string(credentialsId: 'sonarqube', Variable: 'sonartest')]) {
-                    sh 'mvn sonar:sonar -Dsonar.login=$testing for demo -Donar.host.url=${Sonarurl}'
+                sh 'mvn install' 
             }
+        }
+        stage('SonarQube Analysis'){
+            steps{
+                   withSonarQubeEnv('sonarqube') {
+                        sh 'mvn clean verify sonar:sonar \
+                        mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=sonartesting-key \
+  -Dsonar.host.url=http://20.219.236.142:9010 \
+  -Dsonar.login=sqp_a2da434cf43f081662b481dc65ec43803b9ecda2
+                    }
+            }
+        }
         }
     }
- }
-}
-
+        
 
